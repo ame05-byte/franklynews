@@ -7,294 +7,910 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Franklin:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-
   :root {
-    --bg: #F5F0E8;
-    --bg-card: #F5F0E8;
-    --bg-card-alt: #EDE8DD;
-    --text: #1A1A1A;
-    --text-muted: #6B6560;
-    --red: #CC2A1E;
-    --black: #111;
-    --divider: #D4CFC5;
-    --nav-bg: #F5F0E8;
+    --bg:#F5F0E8;--bg-card:#F5F0E8;--bg-card-alt:#EDE8DD;
+    --text:#1A1A1A;--text-muted:#6B6560;--red:#CC2A1E;
+    --black:#111;--divider:#D4CFC5;--nav-bg:#F5F0E8;
   }
-
-  html { font-size: 16px; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-    overflow-x: hidden;
+  html{font-size:16px}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:'Cormorant Garamond',Georgia,serif;
+    -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden;
   }
 
   /* ── HEADER ── */
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg);
-    border-bottom: 1px solid var(--divider);
+  .header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;position:sticky;top:0;z-index:100;
+    background:var(--bg);border-bottom:1px solid var(--divider);
+  }
+  .logo{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:1.65rem;
+    color:var(--text);display:flex;align-items:baseline;cursor:pointer;user-select:none;
+  }
+  .logo-h{
+    display:inline-flex;align-items:center;justify-content:center;
+    background:var(--red);color:#fff;width:32px;height:38px;
+    font-size:2rem;font-weight:900;line-height:1;margin-right:2px;position:relative;top:2px;
+  }
+  .logo-rest{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;
+    font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;
+  }
+  .header-actions{display:flex;align-items:center;gap:18px}
+  .icon-btn{
+    background:none;border:none;cursor:pointer;padding:6px;
+    color:var(--text);transition:opacity .2s;position:relative;z-index:5;
+  }
+  .icon-btn:hover{opacity:.6}
+  .icon-btn svg{display:block}
+
+  /* ── DATE BAR ── */
+  .date-bar{
+    text-align:center;padding:10px 20px;font-family:'Libre Franklin',sans-serif;
+    font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--text-muted);border-bottom:1px solid var(--divider);
   }
 
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 1.65rem;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    display: flex;
-    align-items: baseline;
-    gap: 0;
-    cursor: default;
-    user-select: none;
+  /* ── BREAKING ── */
+  .breaking-banner{
+    background:var(--red);color:#fff;padding:10px 20px;
+    display:flex;align-items:center;gap:12px;overflow:hidden;
   }
-
-  .logo-h {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--red);
-    color: #fff;
-    width: 32px;
-    height: 38px;
-    font-size: 2rem;
-    font-weight: 900;
-    line-height: 1;
-    margin-right: 2px;
-    position: relative;
-    top: 2px;
+  .breaking-label{
+    font-family:'Libre Franklin',sans-serif;font-weight:900;font-size:.7rem;
+    letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+    padding:3px 10px;background:#fff;color:var(--red);border-radius:2px;flex-shrink:0;
   }
-
-  .logo-rest {
-    font-family: 'Libre Franklin', sans-serif;
-    font-weight: 800;
-    font-size: 1.1rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .breaking-marquee{overflow:hidden;flex:1}
+  .breaking-text{
+    font-family:'Libre Franklin',sans-serif;font-weight:600;font-size:.82rem;
+    white-space:nowrap;display:inline-block;animation:scroll-text 25s linear infinite;
   }
+  @keyframes scroll-text{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  /* ── CAT NAV ── */
+  .cat-nav{
+    display:flex;align-items:stretch;border-bottom:3px solid var(--black);
+    overflow-x:auto;scrollbar-width:none;background:var(--nav-bg);
   }
-
-  .icon-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    color: var(--text);
-    transition: opacity 0.2s;
+  .cat-nav::-webkit-scrollbar{display:none}
+  .cat-tab{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:.78rem;
+    letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;white-space:nowrap;
+    cursor:pointer;border:none;background:transparent;color:var(--text);
+    position:relative;transition:background .2s,color .2s;border-right:1px solid var(--divider);
   }
-  .icon-btn:hover { opacity: 0.6; }
-  .icon-btn svg { display: block; }
-
-  /* ── CATEGORY NAV ── */
-  .cat-nav {
-    display: flex;
-    align-items: stretch;
-    border-bottom: 3px solid var(--black);
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    background: var(--nav-bg);
+  .cat-tab:first-child{background:var(--bg-card)}
+  .cat-tab.active{color:var(--red)}
+  .cat-tab.active::after{
+    content:'';position:absolute;bottom:-3px;left:0;right:0;height:3px;background:var(--red);
   }
-  .cat-nav::-webkit-scrollbar { display: none; }
-
-  .cat-tab {
-    font-family: 'Libre Franklin', sans-serif;
-    font-weight: 800;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 12px 20px;
-    white-space: nowrap;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: var(--text);
-    position: relative;
-    transition: background 0.2s, color 0.2s;
-    border-right: 1px solid var(--divider);
-  }
-
-  .cat-tab:first-child {
-    background: var(--bg-card);
-  }
-
-  .cat-tab.active {
-    color: var(--red);
-  }
-
-  .cat-tab.active::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--red);
-  }
-
-  .cat-tab:hover { background: rgba(0,0,0,0.03); }
-
-  .cat-tab .frankly {
-    font-style: italic;
-    font-weight: 700;
-    color: var(--red);
-    letter-spacing: 0.01em;
-    font-family: 'Libre Franklin', sans-serif;
+  .cat-tab:hover{background:rgba(0,0,0,.03)}
+  .cat-tab .frankly{
+    font-style:italic;font-weight:700;color:var(--red);
+    letter-spacing:.01em;font-family:'Libre Franklin',sans-serif;
   }
 
   /* ── NEWS LIST ── */
-  .news-list {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0;
+  .news-list{max-width:720px;margin:0 auto;padding:0}
+  .news-card{
+    display:flex;align-items:flex-start;gap:18px;padding:28px 20px;
+    border-bottom:1px solid var(--divider);cursor:pointer;
+    transition:background .25s;opacity:0;transform:translateY(16px);
+    animation:cardIn .5s ease forwards;
+  }
+  .news-card:nth-child(1){animation-delay:.08s}
+  .news-card:nth-child(2){animation-delay:.16s}
+  .news-card:nth-child(3){animation-delay:.24s}
+  .news-card:nth-child(4){animation-delay:.32s}
+  .news-card:nth-child(5){animation-delay:.40s}
+  .news-card:nth-child(6){animation-delay:.48s}
+  .news-card:nth-child(7){animation-delay:.56s}
+  .news-card:nth-child(8){animation-delay:.64s}
+  @keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+  .news-card:hover{background:rgba(0,0,0,.02)}
+  .news-card:nth-child(even){background:var(--bg-card-alt)}
+  .news-card:nth-child(even):hover{background:#E8E3D8}
+  .card-thumb{
+    width:100px;height:100px;min-width:100px;border-radius:10px;
+    overflow:hidden;background:#ddd;display:flex;align-items:center;justify-content:center;
+  }
+  .card-thumb .thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .card-body{flex:1;min-width:0}
+  .card-tag{
+    display:inline-block;font-family:'Libre Franklin',sans-serif;font-weight:800;
+    font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:6px;
+  }
+  .card-headline{
+    font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;
+    line-height:1.3;color:var(--text);margin-bottom:14px;letter-spacing:-.01em;
+  }
+  .card-meta{display:flex;align-items:center;justify-content:flex-end;gap:16px}
+  .card-source{
+    font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:.68rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);
+  }
+  .card-time{
+    font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:.72rem;
+    color:var(--red);letter-spacing:.02em;
+  }
+  .section-bar{background:var(--black);height:6px;width:100%}
+  .footer{
+    text-align:center;padding:32px 20px;font-family:'Libre Franklin',sans-serif;
+    font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text-muted);border-top:3px solid var(--black);margin-top:20px;
   }
 
-  /* ── NEWS CARD ── */
+  /* ══ SEARCH OVERLAY ══ */
+  .search-overlay{
+    position:fixed;inset:0;background:rgba(17,17,17,.6);z-index:300;
+    opacity:0;pointer-events:none;transition:opacity .3s;
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  }
+  .search-overlay.open{opacity:1;pointer-events:auto}
+  .search-panel{
+    background:var(--bg);width:100%;max-height:85vh;overflow-y:auto;
+    padding:0;transform:translateY(-100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+    box-shadow:0 8px 40px rgba(0,0,0,.15);
+  }
+  .search-overlay.open .search-panel{transform:translateY(0)}
+  .search-header{
+    display:flex;align-items:center;gap:12px;padding:18px 20px;
+    border-bottom:1px solid var(--divider);position:sticky;top:0;background:var(--bg);z-index:2;
+  }
+  .search-header svg{flex-shrink:0;color:var(--text-muted)}
+  .search-input{
+    flex:1;border:none;background:transparent;outline:none;
+    font-family:'Libre Franklin',sans-serif;font-size:1.1rem;font-weight:600;
+    color:var(--text);letter-spacing:.02em;
+  }
+  .search-input::placeholder{color:var(--divider);font-weight:500}
+  .search-close{
+    background:none;border:none;cursor:pointer;padding:6px;color:var(--text-muted);
+    transition:color .2s;flex-shrink:0;
+  }
+  .search-close:hover{color:var(--text)}
+  .search-close svg{display:block}
+  .search-results{padding:8px 0}
+  .search-result-item{
+    display:flex;align-items:center;gap:16px;padding:16px 20px;
+    cursor:pointer;transition:background .2s;
+  }
+  .search-result-item:hover{background:rgba(0,0,0,.03)}
+  .search-result-tag{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:.55rem;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:2px;
+  }
+  .search-result-title{
+    font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;
+    line-height:1.3;color:var(--text);
+  }
+  .search-result-dot{
+    width:8px;height:8px;min-width:8px;border-radius:50%;background:var(--red);opacity:.4;
+  }
+  .search-empty{
+    padding:40px 20px;text-align:center;
+    font-family:'Libre Franklin',sans-serif;font-size:.85rem;
+    font-weight:600;color:var(--text-muted);
+  }
+  .search-hint{
+    padding:16px 20px;font-family:'Libre Franklin',sans-serif;font-size:.7rem;
+    font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);
+  }
+
+  /* ══ HAMBURGER MENU ══ */
+  .menu-overlay{
+    position:fixed;inset:0;background:rgba(17,17,17,.5);z-index:300;
+    opacity:0;pointer-events:none;transition:opacity .3s;
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  }
+  .menu-overlay.open{opacity:1;pointer-events:auto}
+  .menu-panel{
+    position:fixed;top:0;right:0;bottom:0;width:300px;max-width:85vw;
+    background:var(--bg);z-index:301;
+    transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+    box-shadow:-8px 0 40px rgba(0,0,0,.12);overflow-y:auto;
+    display:flex;flex-direction:column;
+  }
+  .menu-overlay.open .menu-panel{transform:translateX(0)}
+  .menu-top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 24px;border-bottom:3px solid var(--black);
+  }
+  .menu-logo{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;
+    font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text);
+  }
+  .menu-close{
+    background:none;border:none;cursor:pointer;padding:4px;
+    color:var(--text);transition:opacity .2s;
+  }
+  .menu-close:hover{opacity:.6}
+  .menu-close svg{display:block}
+  .menu-section{padding:24px 24px 8px}
+  .menu-section-label{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:.6rem;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;
+  }
+  .menu-link{
+    display:flex;align-items:center;gap:14px;padding:14px 0;
+    border-bottom:1px solid var(--divider);cursor:pointer;transition:opacity .2s;
+    text-decoration:none;color:var(--text);
+  }
+  .menu-link:last-child{border-bottom:none}
+  .menu-link:hover{opacity:.6}
+  .menu-link-icon{
+    width:36px;height:36px;border-radius:8px;background:var(--bg-card-alt);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .menu-link-icon svg{display:block}
+  .menu-link-text{
+    font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:.82rem;
+    letter-spacing:.04em;
+  }
+  .menu-link-desc{
+    font-family:'Libre Franklin',sans-serif;font-weight:500;font-size:.68rem;
+    color:var(--text-muted);margin-top:2px;
+  }
+  .menu-footer{
+    margin-top:auto;padding:24px;border-top:1px solid var(--divider);
+    font-family:'Libre Franklin',sans-serif;font-size:.65rem;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);
+    text-align:center;
+  }
+  .menu-cta{
+    display:block;margin:0 24px 24px;padding:14px;text-align:center;
+    background:var(--red);color:#fff;border:none;border-radius:4px;cursor:pointer;
+    font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:.75rem;
+    letter-spacing:.1em;text-transform:uppercase;transition:opacity .2s;
+  }
+  .menu-cta:hover{opacity:.85}
+
+  /* ══ ARTICLE DETAIL ══ */
+  .article-page{
+    position:fixed;inset:0;background:var(--bg);z-index:200;overflow-y:auto;
+    transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  .article-page.open{transform:translateX(0)}
+  .article-top-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;position:sticky;top:0;background:var(--bg);
+    border-bottom:1px solid var(--divider);z-index:10;
+  }
+  .back-btn{
+    display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;
+    font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:.78rem;
+    letter-spacing:.06em;text-transform:uppercase;color:var(--text);transition:opacity .2s;
+  }
+  .back-btn:hover{opacity:.6}
+  .back-btn svg{display:block}
+  .article-top-logo{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:.8rem;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);
+  }
+  .article-hero{width:100%;height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .article-content{max-width:640px;margin:0 auto;padding:32px 20px 60px}
+  .article-tag{
+    display:inline-block;font-family:'Libre Franklin',sans-serif;font-weight:800;
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);
+    margin-bottom:14px;padding:4px 12px;border:2px solid var(--red);border-radius:2px;
+  }
+  .article-title{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;
+    line-height:1.2;color:var(--text);margin-bottom:18px;letter-spacing:-.02em;
+  }
+  .article-byline{
+    font-family:'Libre Franklin',sans-serif;font-size:.78rem;font-weight:600;
+    color:var(--text-muted);letter-spacing:.04em;margin-bottom:8px;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  }
+  .article-byline-dot{width:4px;height:4px;border-radius:50%;background:var(--divider)}
+  .article-divider{width:60px;height:3px;background:var(--red);margin:24px 0}
+  .article-body{
+    font-family:'Cormorant Garamond',Georgia,serif;font-size:1.25rem;
+    line-height:1.85;color:var(--text);
+  }
+  .article-body p{margin-bottom:20px}
+  .article-body p:first-child::first-letter{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:3.4rem;
+    float:left;line-height:.8;margin-right:8px;margin-top:6px;color:var(--red);
+  }
+  .article-share{
+    display:flex;gap:12px;margin-top:32px;padding-top:24px;border-top:1px solid var(--divider);
+  }
+  .share-btn{
+    font-family:'Libre Franklin',sans-serif;font-weight:700;font-size:.68rem;
+    letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;
+    border:2px solid var(--black);background:transparent;color:var(--text);
+    cursor:pointer;transition:background .2s,color .2s;
+  }
+  .share-btn:hover{background:var(--black);color:#fff}
+  .related-section{margin-top:40px;padding-top:24px;border-top:3px solid var(--black)}
+  .related-label{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:.72rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:18px;
+  }
+  .related-item{
+    padding:16px 0;border-bottom:1px solid var(--divider);cursor:pointer;transition:opacity .2s;
+  }
+  .related-item:hover{opacity:.7}
+  .related-item-tag{
+    font-family:'Libre Franklin',sans-serif;font-weight:800;font-size:.58rem;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:4px;
+  }
+  .related-item-title{
+    font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;
+    line-height:1.3;color:var(--text);
+  }
+
+  @media(max-width:480px){
+    .card-headline{font-size:1.1rem}
+    .card-thumb{width:80px;height:80px;min-width:80px}
+    .news-card{gap:14px;padding:22px 16px}
+    .logo-rest{font-size:.95rem}
+    .article-title{font-size:1.6rem}
+    .article-hero{height:180px}
+    .menu-panel{width:280px}
+  }
+  body::after{
+    content:'';position:fixed;inset:0;pointer-events:none;opacity:.025;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat:repeat;background-size:200px 200px;z-index:9999;
+  }
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--divider);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo" onclick="goHome()">
+    <span class="logo-h">F</span><span class="logo-rest">rankly</span>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <button class="icon-btn" aria-label="Menu" onclick="toggleMenu()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearch(event)">
+  <div class="search-panel" onclick="event.stopPropagation()">
+    <div class="search-header">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search articles..." oninput="handleSearch(this.value)" autocomplete="off">
+      <button class="search-close" onclick="toggleSearch()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="searchResults">
+      <div class="search-hint">TRENDING</div>
+      <div id="searchTrending"></div>
+    </div>
+  </div>
+</div>
+
+<!-- HAMBURGER MENU -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu(event)">
+  <div class="menu-panel" onclick="event.stopPropagation()">
+    <div class="menu-top">
+      <span class="menu-logo">Frankly</span>
+      <button class="menu-close" onclick="toggleMenu()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-label">Sections</div>
+      <a class="menu-link" onclick="filterCategory('all');toggleMenu()">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <div><div class="menu-link-text">All Stories</div><div class="menu-link-desc">Today's top headlines</div></div>
+      </a>
+      <a class="menu-link" onclick="filterCategory('U.S. POLITICS');toggleMenu()">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16"/></svg></div>
+        <div><div class="menu-link-text">U.S. Politics</div><div class="menu-link-desc">Government & policy</div></div>
+      </a>
+      <a class="menu-link" onclick="filterCategory('WORLD');toggleMenu()">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <div><div class="menu-link-text">World</div><div class="menu-link-desc">International affairs</div></div>
+      </a>
+      <a class="menu-link" onclick="filterCategory('TECH');toggleMenu()">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div><div class="menu-link-text">Technology</div><div class="menu-link-desc">Tech & digital</div></div>
+      </a>
+      <a class="menu-link" onclick="filterCategory('SCIENCE');toggleMenu()">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3v7.2L5.7 16a3 3 0 002.5 4.6h7.6a3 3 0 002.5-4.6L15 10.2V3"/><line x1="9" y1="3" x2="15" y2="3"/></svg></div>
+        <div><div class="menu-link-text">Science</div><div class="menu-link-desc">Space, health & discovery</div></div>
+      </a>
+      <a class="menu-link" onclick="filterCategory('BUSINESS');toggleMenu()">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div><div class="menu-link-text">Business</div><div class="menu-link-desc">Markets & economy</div></div>
+      </a>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-section-label">More</div>
+      <a class="menu-link">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg></div>
+        <div><div class="menu-link-text">Saved Articles</div></div>
+      </a>
+      <a class="menu-link">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        <div><div class="menu-link-text">Settings</div></div>
+      </a>
+      <a class="menu-link">
+        <div class="menu-link-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+        <div><div class="menu-link-text">About Frankly</div></div>
+      </a>
+    </div>
+
+    <button class="menu-cta">Subscribe to Newsletter</button>
+
+    <div class="menu-footer">&copy; 2026 Frankly News</div>
+  </div>
+</div>
+
+<!-- FEED VIEW -->
+<div id="feedView">
+  <div class="date-bar">Thursday, April 3, 2026</div>
+  <div class="breaking-banner">
+    <span class="breaking-label">LIVE</span>
+    <div class="breaking-marquee">
+      <span class="breaking-text">Artemis II crew approaching the Moon — first humans beyond Earth orbit since 1972 &nbsp;&bull;&nbsp; U.S. employers add 178,000 jobs in March &nbsp;&bull;&nbsp; Trump proposes record $1.5T defense budget &nbsp;&bull;&nbsp; Iran claims it shot down U.S. fighter jet</span>
+    </div>
+  </div>
+  <nav class="cat-nav" id="catNav">
+    <button class="cat-tab active" data-cat="all"><span class="frankly">frankly</span>NEW</button>
+    <button class="cat-tab" data-cat="U.S. POLITICS">U.S</button>
+    <button class="cat-tab" data-cat="WORLD">WORLD</button>
+    <button class="cat-tab" data-cat="TECH">TECH</button>
+    <button class="cat-tab" data-cat="SCIENCE">SCIENCE</button>
+    <button class="cat-tab" data-cat="BUSINESS">BUSINESS</button>
+  </nav>
+  <main class="news-list" id="newsList"></main>
+  <footer class="footer">&copy; 2026 Frankly News &nbsp;&bull;&nbsp; All rights reserved</footer>
+</div>
+
+<!-- ARTICLE PAGE -->
+<div class="article-page" id="articlePage">
+  <div class="article-top-bar">
+    <button class="back-btn" onclick="closeArticle()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>Back
+    </button>
+    <span class="article-top-logo">FRANKLY</span>
+  </div>
+  <div id="articleHero" class="article-hero"></div>
+  <div class="article-content" id="articleContent"></div>
+</div>
+
+<script>
+const articles=[
+  {headline:"Artemis II Crew on Course for the Moon in First Crewed Deep Space Mission Since Apollo",tag:"SCIENCE",source:"FRANKLY",time:"2 hrs ago",author:"Sarah Mitchell",bg:"#0B1D3A",icon:`<svg width="64" height="64" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="16" fill="#1E3A5F"/><circle cx="22" cy="22" r="10" fill="#C0C8D4" opacity="0.9"/><circle cx="18" cy="19" r="3" fill="#A0AAB8" opacity="0.5"/><circle cx="26" cy="24" r="2" fill="#A0AAB8" opacity="0.4"/></svg>`,body:["NASA's Artemis II mission has reached a pivotal milestone as the Orion spacecraft, carrying four astronauts, successfully completed its translunar injection burn and is now hurtling toward the Moon. The crew — Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialists Christina Koch and Jeremy Hansen — are the first humans to travel beyond low Earth orbit since Apollo 17 in December 1972.","The spacecraft launched from Kennedy Space Center at 6:35 p.m. EDT on April 1, and by Thursday evening had fired its main engine for nearly six minutes to break free of Earth orbit. Flight controllers in Houston confirmed the burn was nominal.","The 10-day mission will see the crew travel farther from Earth than any humans in history, reaching approximately 252,800 miles. Glover becomes the first person of color, Koch the first woman, and Hansen the first non-U.S. citizen to venture beyond low Earth orbit.","Mission planners have built in a rare treat — a solar eclipse visible from Orion's vantage point. During this hour-long event, the crew will photograph the solar corona and watch for meteoroid impacts on the lunar surface.","The mission serves as a critical test of Orion's life-support systems and navigation capabilities ahead of Artemis III, which aims to land astronauts on the Moon."]},
+  {headline:"Trump Proposes Record $1.5 Trillion Defense Budget as Spending Reaches WWII Levels",tag:"U.S. POLITICS",source:"FRANKLY",time:"3 hrs ago",author:"James Carter",bg:"#1A1A2E",icon:`<svg width="56" height="56" viewBox="0 0 40 40"><rect x="8" y="16" width="24" height="16" rx="2" fill="#333952"/><polygon points="20,6 12,16 28,16" fill="#4A5580"/><rect x="18" y="20" width="4" height="8" fill="#6B7DB3" opacity="0.7"/></svg>`,body:["President Trump has submitted the largest defense budget request in American history, calling for $1.5 trillion in military spending. The proposal represents the steepest year-over-year increase since World War II.","The budget includes F-35 stealth fighter jets, Virginia-class submarines, and the \"Golden Dome\" missile defense shield, estimated at $185 billion alone.","During a White House Easter lunch, the president said the government could no longer afford social programs like daycare, Medicare, and Medicaid, suggesting states take responsibility.","Congressional Democrats called the budget a statement of misplaced priorities. Defense analysts questioned whether the Pentagon can absorb increases of this magnitude.","The proposal arrives as the U.S. enters its second month of operations against Iran with no clear timeline for resolution."]},
+  {headline:"U.S. Economy Adds 178,000 Jobs in March as Unemployment Dips to 4.3%",tag:"BUSINESS",source:"FRANKLY",time:"5 hrs ago",author:"Rachel Torres",bg:"#1B5E3B",icon:`<svg width="56" height="56" viewBox="0 0 40 40"><rect x="6" y="26" width="6" height="10" fill="#4CAF80"/><rect x="14" y="20" width="6" height="16" fill="#3D9E6E"/><rect x="22" y="14" width="6" height="22" fill="#2E8B5A"/><rect x="30" y="8" width="6" height="28" fill="#1F7A48"/></svg>`,body:["The U.S. labor market showed resilience in March, with employers adding 178,000 jobs and reversing losses from the previous month. Unemployment edged down to 4.3 percent.","Healthcare and hospitality led the gains. Professional and business services also contributed meaningfully.","Economists offered mixed interpretations — some saw a healthy market while others cautioned about declining labor force participation masking softness.","Financial markets reacted modestly with indices ticking higher. The data will factor into the Fed's next interest rate decision.","The report comes with global oil prices elevated due to the Middle East conflict and consumer confidence showing caution."]},
+  {headline:"Jury Finds Meta and YouTube Liable for Harming Youth Through Addictive Design",tag:"TECH",source:"FRANKLY",time:"6 hrs ago",author:"David Chen",bg:"#CC2A1E",icon:`<svg width="50" height="50" viewBox="0 0 36 36"><rect x="4" y="4" width="28" height="28" rx="6" fill="#E8453A"/><rect x="10" y="14" width="16" height="2" rx="1" fill="#fff"/><rect x="10" y="20" width="16" height="2" rx="1" fill="#fff"/><circle cx="13" cy="10" r="2" fill="#fff" opacity="0.6"/></svg>`,body:["A Los Angeles jury found Meta and YouTube liable for harming a young woman through addictive platform design — a landmark verdict that could reshape tech industry accountability.","The case argued algorithmically-driven content feeds contributed to severe mental health consequences. Internal documents showed both companies were aware of harms but prioritized engagement.","Advocacy groups hope the ruling builds momentum for legislative action against platforms that exploit psychological vulnerabilities in minors.","Both companies plan to appeal under existing communications law protections. The case could reach the Supreme Court.","Multiple states have already moved to restrict minors' access to social media, while Congress debates federal design standards."]},
+  {headline:"Iran Claims It Shot Down U.S. Fighter Jet as Gulf Tensions Escalate",tag:"WORLD",source:"FRANKLY",time:"4 hrs ago",author:"Nadia Karim",bg:"#3A1A0A",icon:`<svg width="56" height="56" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#5C2D0E"/><path d="M12 20 L20 12 L28 20 L20 28 Z" fill="#D4871C" opacity="0.8"/><circle cx="20" cy="20" r="4" fill="#E8A840"/></svg>`,body:["Iranian state media reported that air defenses shot down a U.S. fighter jet — partially confirmed by a U.S. official acknowledging a search-and-rescue operation.","The Pentagon declined specifics citing operational security. Iran displayed claimed wreckage on state television without independent verification.","Kuwait reported Iranian strikes on power infrastructure. Saudi Arabia intercepted drones. Bahrain contained fires from attacks on facilities.","Yemen's Houthis fired missiles at Israel in coordination with Iran and Hezbollah. In Iraq, militias claimed six attacks on U.S. bases in 24 hours.","Thirty-five nations convened to discuss the Strait of Hormuz. The U.S. was absent from the meeting organized by British PM Starmer."]},
+  {headline:"Trump Fires Attorney General Pam Bondi, Names Former Defense Lawyer as Replacement",tag:"U.S. POLITICS",source:"FRANKLY",time:"8 hrs ago",author:"Michael Reeves",bg:"#2A2040",icon:`<svg width="50" height="50" viewBox="0 0 36 36"><rect x="6" y="8" width="24" height="20" rx="3" fill="#4A3B6B"/><path d="M10 14h16M10 18h12M10 22h8" stroke="#8B7EC8" stroke-width="1.5" stroke-linecap="round"/></svg>`,body:["President Trump fired Attorney General Pam Bondi and named his former criminal defense lawyer as replacement, capping a turbulent DOJ tenure.","The departure came without notice. The White House called it a personnel decision for better-aligned leadership.","Legal experts questioned whether a personal defense attorney could maintain the traditional independence of the role.","During her tenure, Bondi oversaw demands for sensitive voter data and led the release of the Epstein files.","Senate confirmation is required, with Republican senators signaling they want answers about handling ongoing investigations."]},
+  {headline:"COVID Variant BA.3.2 'Cicada' Detected in 23 Countries and Half of U.S. States",tag:"HEALTH",source:"FRANKLY",time:"7 hrs ago",author:"Dr. Lisa Park",bg:"#0E4D40",icon:`<svg width="50" height="50" viewBox="0 0 36 36"><circle cx="18" cy="18" r="12" fill="#1A6B58"/><circle cx="18" cy="18" r="6" fill="#2AAA8A" opacity="0.7"/><circle cx="18" cy="18" r="2" fill="#5DDFC0"/><line x1="18" y1="6" x2="18" y2="12" stroke="#2AAA8A" stroke-width="1.5"/><line x1="18" y1="24" x2="18" y2="30" stroke="#2AAA8A" stroke-width="1.5"/><line x1="6" y1="18" x2="12" y2="18" stroke="#2AAA8A" stroke-width="1.5"/><line x1="24" y1="18" x2="30" y2="18" stroke="#2AAA8A" stroke-width="1.5"/></svg>`,body:["A new COVID-19 variant BA.3.2, nicknamed \"Cicada,\" has been detected in 23 countries and half of U.S. states, raising spring wave concerns.","Genomic analysis suggests spike protein mutations may enhance immune evasion, though lab findings don't always predict real-world severity.","Hospitals report modest upticks in admissions, still far below previous peaks. Wastewater surveillance is being monitored closely.","The FDA recently approved a new GLP-1 drug from Eli Lilly. Officials urge high-risk groups to stay current on vaccinations.","Researchers also published findings on why some healthcare workers resist flu infection — work that could inform broader prevention."]},
+  {headline:"Pentagon Fires Army Chief of Staff in Latest Military Leadership Shakeup",tag:"DEFENSE",source:"FRANKLY",time:"10 hrs ago",author:"Tom Bradley",bg:"#2C2C2C",icon:`<svg width="50" height="50" viewBox="0 0 36 36"><polygon points="18,4 22,14 33,14 24,21 27,32 18,25 9,32 12,21 3,14 14,14" fill="#555" opacity="0.8"/></svg>`,body:["Defense Secretary Hegseth asked Army Chief of Staff Gen. Randy George to retire, the latest Pentagon leadership change since the Iran conflict began.","George had served since 2023 and was respected for modernization focus. Sources cited operational strategy disagreements.","Retired officers expressed concern about turnover pace during active conflict, warning of disrupted command continuity.","Hegseth said the Army needed leadership aligned with the administration's vision. No successor has been named.","The firing accompanies the record defense budget and increasing Iranian-backed militia attacks across the Middle East."]}
+];
+
+let currentFilter = 'all';
+
+function getFiltered() {
+  if (currentFilter === 'all') return articles;
+  return articles.filter(a => a.tag === currentFilter || (currentFilter === 'HEALTH' && a.tag === 'HEALTH') || (currentFilter === 'DEFENSE' && a.tag === 'DEFENSE'));
+}
+
+function renderArticles() {
+  const list = document.getElementById('newsList');
+  const filtered = getFiltered();
+  list.innerHTML = '';
+  if (filtered.length === 0) {
+    list.innerHTML = '<div style="padding:60px 20px;text-align:center;font-family:Libre Franklin,sans-serif;font-size:.85rem;color:var(--text-muted);font-weight:600">No articles in this section yet.</div>';
+    return;
+  }
+  filtered.forEach((a, i) => {
+    const realIdx = articles.indexOf(a);
+    const showBar = currentFilter === 'all' && (i === 3 || i === 6);
+    let html = '';
+    if (showBar) html += `<div class="section-bar"></div>`;
+    html += `<article class="news-card" style="animation-delay:${i * 0.08 + 0.08}s" onclick="openArticle(${realIdx})">
+      <div class="card-thumb"><div class="thumb-placeholder" style="background:${a.bg}">${a.icon}</div></div>
+      <div class="card-body">
+        <span class="card-tag">${a.tag}</span>
+        <h2 class="card-headline">${a.headline}</h2>
+        <div class="card-meta"><span class="card-source">${a.source}</span><span class="card-time">${a.time}</span></div>
+      </div>
+    </article>`;
+    list.insertAdjacentHTML('beforeend', html);
+  });
+}
+
+function filterCategory(cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.cat-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.cat === cat);
+  });
+  renderArticles();
+}
+
+// ── SEARCH ──
+function toggleSearch() {
+  const o = document.getElementById('searchOverlay');
+  const isOpen = o.classList.toggle('open');
+  if (isOpen) {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchInput').focus();
+    showTrending();
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+function closeSearch(e) {
+  if (e.target === e.currentTarget) toggleSearch();
+}
+function showTrending() {
+  const container = document.getElementById('searchTrending');
+  container.innerHTML = articles.slice(0, 4).map((a, i) =>
+    `<div class="search-result-item" onclick="toggleSearch();openArticle(${i})">
+      <span class="search-result-dot"></span>
+      <div><div class="search-result-tag">${a.tag}</div><div class="search-result-title">${a.headline}</div></div>
+    </div>`
+  ).join('');
+}
+function handleSearch(q) {
+  const res = document.getElementById('searchResults');
+  if (!q.trim()) { res.innerHTML = '<div class="search-hint">TRENDING</div><div id="searchTrending"></div>'; showTrending(); return; }
+  const lower = q.toLowerCase();
+  const matches = articles.filter(a =>
+    a.headline.toLowerCase().includes(lower) || a.tag.toLowerCase().includes(lower) || a.body.some(p => p.toLowerCase().includes(lower))
+  );
+  if (matches.length === 0) {
+    res.innerHTML = `<div class="search-empty">No results for "${q}"</div>`;
+    return;
+  }
+  res.innerHTML = '<div class="search-hint">RESULTS</div>' + matches.map(a => {
+    const idx = articles.indexOf(a);
+    return `<div class="search-result-item" onclick="toggleSearch();openArticle(${idx})">
+      <span class="search-result-dot"></span>
+      <div><div class="search-result-tag">${a.tag}</div><div class="search-result-title">${a.headline}</div></div>
+    </div>`;
+  }).join('');
+}
+
+// ── MENU ──
+function toggleMenu() {
+  const o = document.getElementById('menuOverlay');
+  const isOpen = o.classList.toggle('open');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMenu(e) {
+  if (e.target === e.currentTarget) toggleMenu();
+}
+
+// ── ARTICLE ──
+function openArticle(index) {
+  const a = articles[index];
+  const page = document.getElementById('articlePage');
+  document.getElementById('articleHero').style.background = a.bg;
+  document.getElementById('articleHero').innerHTML = a.icon.replace(/width="\d+"/g,'width="100"').replace(/height="\d+"/g,'height="100"');
+  const related = articles.filter((_,i) => i !== index).slice(0,3);
+  document.getElementById('articleContent').innerHTML = `
+    <span class="article-tag">${a.tag}</span>
+    <h1 class="article-title">${a.headline}</h1>
+    <div class="article-byline"><span>By ${a.author}</span><span class="article-byline-dot"></span><span>${a.time}</span><span class="article-byline-dot"></span><span>April 3, 2026</span></div>
+    <div class="article-divider"></div>
+    <div class="article-body">${a.body.map(p=>`<p>${p}</p>`).join('')}</div>
+    <div class="article-share"><button class="share-btn" onclick="shareArticle()">Share</button><button class="share-btn">Save</button></div>
+    <div class="related-section"><div class="related-label">More from Frankly</div>
+    ${related.map(r=>{const idx=articles.indexOf(r);return`<div class="related-item" onclick="openArticle(${idx})"><div class="related-item-tag">${r.tag}</div><div class="related-item-title">${r.headline}</div></div>`}).join('')}</div>`;
+  page.classList.add('open');
+  page.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  history.pushState({article:index},'');
+}
+function closeArticle() {
+  document.getElementById('articlePage').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function goHome() { closeArticle(); window.scrollTo({top:0,behavior:'smooth'}); }
+function shareArticle() {
+  if (navigator.share) navigator.share({title:'Frankly News',url:location.href});
+  else { navigator.clipboard.writeText(location.href); alert('Link copied!'); }
+}
+
+// ── TAB NAV ──
+document.getElementById('catNav').addEventListener('click', e => {
+  const tab = e.target.closest('.cat-tab');
+  if (!tab) return;
+  filterCategory(tab.dataset.cat);
+});
+
+// Keyboard: Escape closes overlays
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('searchOverlay').classList.contains('open')) toggleSearch();
+    else if (document.getElementById('menuOverlay').classList.contains('open')) toggleMenu();
+    else if (document.getElementById('articlePage').classList.contains('open')) closeArticle();
+  }
+});
+
+window.addEventListener('popstate', closeArticle);
+renderArticles();
+</script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frankly</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Libre+Franklin:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root {
+    --bg: #F5F0E8; --bg-card: #F5F0E8; --bg-card-alt: #EDE8DD;
+    --text: #1A1A1A; --text-muted: #6B6560; --red: #CC2A1E;
+    --black: #111; --divider: #D4CFC5; --nav-bg: #F5F0E8;
+  }
+  html { font-size: 16px; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh; overflow-x: hidden;
+  }
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; position: sticky; top: 0; z-index: 100;
+    background: var(--bg); border-bottom: 1px solid var(--divider);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.65rem;
+    color: var(--text); display: flex; align-items: baseline;
+    cursor: pointer; user-select: none;
+  }
+  .logo-h {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--red); color: #fff; width: 32px; height: 38px;
+    font-size: 2rem; font-weight: 900; line-height: 1;
+    margin-right: 2px; position: relative; top: 2px;
+  }
+  .logo-rest {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 800;
+    font-size: 1.1rem; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .header-actions { display: flex; align-items: center; gap: 18px; }
+  .icon-btn {
+    background: none; border: none; cursor: pointer; padding: 6px;
+    color: var(--text); transition: opacity 0.2s;
+  }
+  .icon-btn:hover { opacity: 0.6; }
+  .icon-btn svg { display: block; }
+  .date-bar {
+    text-align: center; padding: 10px 20px;
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.72rem;
+    font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted); border-bottom: 1px solid var(--divider);
+  }
+  .breaking-banner {
+    background: var(--red); color: #fff; padding: 10px 20px;
+    display: flex; align-items: center; gap: 12px; overflow: hidden;
+  }
+  .breaking-label {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 900;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    white-space: nowrap; padding: 3px 10px; background: #fff;
+    color: var(--red); border-radius: 2px; flex-shrink: 0;
+  }
+  .breaking-marquee { overflow: hidden; flex: 1; }
+  .breaking-text {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 600;
+    font-size: 0.82rem; white-space: nowrap; display: inline-block;
+    animation: scroll-text 25s linear infinite;
+  }
+  @keyframes scroll-text { 0%{transform:translateX(100%)} 100%{transform:translateX(-100%)} }
+  .cat-nav {
+    display: flex; align-items: stretch; border-bottom: 3px solid var(--black);
+    overflow-x: auto; scrollbar-width: none; background: var(--nav-bg);
+  }
+  .cat-nav::-webkit-scrollbar { display: none; }
+  .cat-tab {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 800;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 12px 20px; white-space: nowrap; cursor: pointer;
+    border: none; background: transparent; color: var(--text);
+    position: relative; transition: background 0.2s, color 0.2s;
+    border-right: 1px solid var(--divider);
+  }
+  .cat-tab:first-child { background: var(--bg-card); }
+  .cat-tab.active { color: var(--red); }
+  .cat-tab.active::after {
+    content:''; position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 3px; background: var(--red);
+  }
+  .cat-tab:hover { background: rgba(0,0,0,0.03); }
+  .cat-tab .frankly {
+    font-style: italic; font-weight: 700; color: var(--red);
+    letter-spacing: 0.01em; font-family: 'Libre Franklin', sans-serif;
+  }
+  .news-list { max-width: 720px; margin: 0 auto; padding: 0; }
   .news-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    padding: 28px 20px;
-    border-bottom: 1px solid var(--divider);
-    cursor: pointer;
-    transition: background 0.25s;
-    opacity: 0;
-    transform: translateY(16px);
+    display: flex; align-items: flex-start; gap: 18px;
+    padding: 28px 20px; border-bottom: 1px solid var(--divider);
+    cursor: pointer; transition: background 0.25s;
+    opacity: 0; transform: translateY(16px);
     animation: cardIn 0.5s ease forwards;
   }
-
-  .news-card:nth-child(1) { animation-delay: 0.08s; }
-  .news-card:nth-child(2) { animation-delay: 0.16s; }
-  .news-card:nth-child(3) { animation-delay: 0.24s; }
-  .news-card:nth-child(4) { animation-delay: 0.32s; }
-  .news-card:nth-child(5) { animation-delay: 0.40s; }
-  .news-card:nth-child(6) { animation-delay: 0.48s; }
-
-  @keyframes cardIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .news-card:hover {
-    background: rgba(0,0,0,0.02);
-  }
-
-  .news-card:nth-child(even) {
-    background: var(--bg-card-alt);
-  }
-  .news-card:nth-child(even):hover {
-    background: #E8E3D8;
-  }
-
+  .news-card:nth-child(1){animation-delay:.08s}
+  .news-card:nth-child(2){animation-delay:.16s}
+  .news-card:nth-child(3){animation-delay:.24s}
+  .news-card:nth-child(4){animation-delay:.32s}
+  .news-card:nth-child(5){animation-delay:.40s}
+  .news-card:nth-child(6){animation-delay:.48s}
+  .news-card:nth-child(7){animation-delay:.56s}
+  .news-card:nth-child(8){animation-delay:.64s}
+  @keyframes cardIn { to{opacity:1;transform:translateY(0)} }
+  .news-card:hover { background: rgba(0,0,0,0.02); }
+  .news-card:nth-child(even) { background: var(--bg-card-alt); }
+  .news-card:nth-child(even):hover { background: #E8E3D8; }
   .card-thumb {
-    width: 100px;
-    height: 100px;
-    min-width: 100px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100px; height: 100px; min-width: 100px; border-radius: 10px;
+    overflow: hidden; background: #ddd;
+    display: flex; align-items: center; justify-content: center;
   }
-
-  .card-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   .card-thumb .thumb-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #fff;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
   }
-
-  .card-body {
-    flex: 1;
-    min-width: 0;
+  .card-body { flex: 1; min-width: 0; }
+  .card-tag {
+    display: inline-block; font-family: 'Libre Franklin', sans-serif;
+    font-weight: 800; font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--red); margin-bottom: 6px;
   }
-
   .card-headline {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 1.3rem;
-    line-height: 1.3;
-    color: var(--text);
-    margin-bottom: 14px;
-    letter-spacing: -0.01em;
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.3rem; line-height: 1.3; color: var(--text);
+    margin-bottom: 14px; letter-spacing: -0.01em;
   }
-
-  .card-meta {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 16px;
-  }
-
+  .card-meta { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
   .card-source {
-    font-family: 'Libre Franklin', sans-serif;
-    font-weight: 700;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-family: 'Libre Franklin', sans-serif; font-weight: 700;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text-muted);
   }
-
   .card-time {
-    font-family: 'Libre Franklin', sans-serif;
-    font-weight: 700;
-    font-size: 0.72rem;
-    color: var(--red);
-    letter-spacing: 0.02em;
+    font-family: 'Libre Franklin', sans-serif; font-weight: 700;
+    font-size: 0.72rem; color: var(--red); letter-spacing: 0.02em;
+  }
+  .section-bar { background: var(--black); height: 6px; width: 100%; }
+  .footer {
+    text-align: center; padding: 32px 20px;
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.7rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); border-top: 3px solid var(--black); margin-top: 20px;
   }
 
-  /* ── SECTION DIVIDERS ── */
-  .section-bar {
-    background: var(--black);
-    height: 8px;
-    width: 100%;
+  /* ══ ARTICLE DETAIL ══ */
+  .article-page {
+    position: fixed; inset: 0; background: var(--bg); z-index: 200;
+    overflow-y: auto; transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .article-page.open { transform: translateX(0); }
+  .article-top-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; position: sticky; top: 0;
+    background: var(--bg); border-bottom: 1px solid var(--divider); z-index: 10;
+  }
+  .back-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: none; border: none; cursor: pointer;
+    font-family: 'Libre Franklin', sans-serif; font-weight: 700;
+    font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text); transition: opacity 0.2s;
+  }
+  .back-btn:hover { opacity: 0.6; }
+  .back-btn svg { display: block; }
+  .article-top-logo {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 800;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .article-hero {
+    width: 100%; height: 240px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .article-content { max-width: 640px; margin: 0 auto; padding: 32px 20px 60px; }
+  .article-tag {
+    display: inline-block; font-family: 'Libre Franklin', sans-serif;
+    font-weight: 800; font-size: 0.68rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+    padding: 4px 12px; border: 2px solid var(--red); border-radius: 2px;
+  }
+  .article-title {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: 2rem; line-height: 1.2; color: var(--text);
+    margin-bottom: 18px; letter-spacing: -0.02em;
+  }
+  .article-byline {
+    font-family: 'Libre Franklin', sans-serif; font-size: 0.78rem;
+    font-weight: 600; color: var(--text-muted); letter-spacing: 0.04em;
+    margin-bottom: 8px; display: flex; align-items: center; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .article-byline-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--divider); }
+  .article-divider { width: 60px; height: 3px; background: var(--red); margin: 24px 0; }
+  .article-body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem; line-height: 1.85; color: var(--text);
+  }
+  .article-body p { margin-bottom: 20px; }
+  .article-body p:first-child::first-letter {
+    font-family: 'Playfair Display', serif; font-weight: 900;
+    font-size: 3.4rem; float: left; line-height: 0.8;
+    margin-right: 8px; margin-top: 6px; color: var(--red);
+  }
+  .article-share {
+    display: flex; gap: 12px; margin-top: 32px;
+    padding-top: 24px; border-top: 1px solid var(--divider);
+  }
+  .share-btn {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 700;
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 10px 20px; border: 2px solid var(--black);
+    background: transparent; color: var(--text); cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .share-btn:hover { background: var(--black); color: #fff; }
+  .related-section { margin-top: 40px; padding-top: 24px; border-top: 3px solid var(--black); }
+  .related-label {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 800;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 18px;
+  }
+  .related-item {
+    padding: 16px 0; border-bottom: 1px solid var(--divider);
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .related-item:hover { opacity: 0.7; }
+  .related-item-tag {
+    font-family: 'Libre Franklin', sans-serif; font-weight: 800;
+    font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 4px;
+  }
+  .related-item-title {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.05rem; line-height: 1.3; color: var(--text);
   }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 480px) {
     .card-headline { font-size: 1.1rem; }
     .card-thumb { width: 80px; height: 80px; min-width: 80px; }
     .news-card { gap: 14px; padding: 22px 16px; }
     .logo-rest { font-size: 0.95rem; }
+    .article-title { font-size: 1.6rem; }
+    .article-hero { height: 180px; }
   }
-
-  /* ── SUBTLE GRAIN ── */
   body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.025;
+    content: ''; position: fixed; inset: 0; pointer-events: none; opacity: 0.025;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    z-index: 9999;
+    background-repeat: repeat; background-size: 200px 200px; z-index: 9999;
   }
-
-  /* scrollbar */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
@@ -302,9 +918,8 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
-  <div class="logo">
+  <div class="logo" onclick="goHome()">
     <span class="logo-h">F</span><span class="logo-rest">rankly</span>
   </div>
   <div class="header-actions">
@@ -317,133 +932,242 @@
   </div>
 </header>
 
-<!-- CATEGORY NAV -->
-<nav class="cat-nav" id="catNav">
-  <button class="cat-tab active" data-cat="new"><span class="frankly">frankly</span>NEW</button>
-  <button class="cat-tab" data-cat="us">U.S</button>
-  <button class="cat-tab" data-cat="canada">CANADA</button>
-  <button class="cat-tab" data-cat="europe">EUROPE</button>
-  <button class="cat-tab" data-cat="asia">ASIA</button>
-  <button class="cat-tab" data-cat="africa">AFRICA</button>
-</nav>
+<div id="feedView">
+  <div class="date-bar">Thursday, April 3, 2026</div>
+  <div class="breaking-banner">
+    <span class="breaking-label">LIVE</span>
+    <div class="breaking-marquee">
+      <span class="breaking-text">Artemis II crew approaching the Moon — first humans beyond Earth orbit since 1972 &nbsp;&bull;&nbsp; U.S. employers add 178,000 jobs in March &nbsp;&bull;&nbsp; Trump proposes record $1.5T defense budget &nbsp;&bull;&nbsp; Iran claims it shot down U.S. fighter jet</span>
+    </div>
+  </div>
+  <nav class="cat-nav" id="catNav">
+    <button class="cat-tab active" data-cat="new"><span class="frankly">frankly</span>NEW</button>
+    <button class="cat-tab" data-cat="us">U.S</button>
+    <button class="cat-tab" data-cat="world">WORLD</button>
+    <button class="cat-tab" data-cat="tech">TECH</button>
+    <button class="cat-tab" data-cat="science">SCIENCE</button>
+    <button class="cat-tab" data-cat="business">BUSINESS</button>
+  </nav>
+  <main class="news-list" id="newsList"></main>
+  <footer class="footer">&copy; 2026 Frankly News &nbsp;&bull;&nbsp; All rights reserved</footer>
+</div>
 
-<!-- NEWS LIST -->
-<main class="news-list" id="newsList">
-</main>
+<div class="article-page" id="articlePage">
+  <div class="article-top-bar">
+    <button class="back-btn" onclick="closeArticle()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <span class="article-top-logo">FRANKLY</span>
+  </div>
+  <div id="articleHero" class="article-hero"></div>
+  <div class="article-content" id="articleContent"></div>
+</div>
 
 <script>
-  const articles = [
-    {
-      headline: "Markets React as Unexpected Announcement Shakes Investors",
-      source: "FRANKLY",
-      time: "10:40 PM",
-      bg: "#1A1A1A",
-      icon: `<svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="15" r="8" fill="#444"/><ellipse cx="20" cy="35" rx="14" ry="10" fill="#444"/><circle cx="20" cy="15" r="5" fill="#666"/></svg>`,
-      color: "#333"
-    },
-    {
-      headline: "the biggs bitch Giants Face Scrutiny Over Data Privacy Practices",
-      source: "FRANKLY",
-      time: "9:15 PM",
-      bg: "#2A2A5E",
-      icon: `<svg width="36" height="36" viewBox="0 0 36 36"><rect x="6" y="6" width="24" height="24" rx="4" fill="#4A4ADE" opacity="0.7"/><circle cx="18" cy="18" r="6" fill="#fff" opacity="0.9"/></svg>`,
-      color: "#2A2A5E"
-    }, 
-   {
-      headline: "Tech Giants Face Scrutiny Over Data Privacy Practices",
-      source: "FRANKLY",
-      time: "9:15 PM",
-      bg: "#2A2A5E",
-      icon: `<svg width="36" height="36" viewBox="0 0 36 36"><rect x="6" y="6" width="24" height="24" rx="4" fill="#4A4ADE" opacity="0.7"/><circle cx="18" cy="18" r="6" fill="#fff" opacity="0.9"/></svg>`,
-      color: "#2A2A5E"
-    },
-    {
-      headline: "Leaders Hold Emergency Talks as Tensions Continue to Rise",
-      source: "FRANKLY",
-      time: "10:40 PM",
-      bg: "#2D8B5E",
-      icon: `<svg width="50" height="50" viewBox="0 0 50 50"><polygon points="25,8 45,42 5,42" fill="#E8C840"/></svg>`,
-      color: "#1B6B44"
-    },
-    {
-      headline: "Government Faces Growing Pressure After Major Policy Shift",
-      source: "FRANKLY",
-      time: "10:40 PM",
-      bg: "#CC2A1E",
-      icon: `<svg width="36" height="36" viewBox="0 0 36 36"><circle cx="14" cy="14" r="5" fill="#FFD700"/><path d="M18 8 C22 8 28 12 28 20 C28 28 22 32 18 32 C16 32 12 30 12 26 L18 20 Z" fill="white"/></svg>`,
-      color: "#CC2A1E"
-    },
-    {
-      headline: "New Report Raises Serious Questions About Future Trends",
-      source: "FRANKLY",
-      time: "10:40 PM",
-      bg: "#E8E3D8",
-      icon: `<svg width="36" height="36" viewBox="0 0 36 36"><rect x="8" y="10" width="6" height="18" rx="1" fill="#CC2A1E"/><rect x="16" y="10" width="6" height="18" rx="1" fill="#CC2A1E"/></svg>`,
-      color: "#CC2A1E"
-    },
-    {
-      headline: "Tech Giants Face Scrutiny Over Data Privacy Practices",
-      source: "FRANKLY",
-      time: "9:15 PM",
-      bg: "#2A2A5E",
-      icon: `<svg width="36" height="36" viewBox="0 0 36 36"><rect x="6" y="6" width="24" height="24" rx="4" fill="#4A4ADE" opacity="0.7"/><circle cx="18" cy="18" r="6" fill="#fff" opacity="0.9"/></svg>`,
-      color: "#2A2A5E"
-    },
-    {
-      headline: "Climate Summit Delivers Landmark Agreement on Emissions",
-      source: "FRANKLY",
-      time: "8:30 PM",
-      bg: "#1A5C3A",
-      icon: `<svg width="36" height="36" viewBox="0 0 36 36"><path d="M18 6 C26 10 30 18 26 26 C22 34 14 34 10 26 C6 18 10 10 18 6Z" fill="#3CB371"/></svg>`,
-      color: "#1A5C3A"
-    }
-  ];
-
-  function renderArticles() {
-    const list = document.getElementById('newsList');
-    list.innerHTML = '';
-
-    articles.forEach((a, i) => {
-      const showBar = i === 2 || i === 4;
-      let html = '';
-      if (showBar) {
-        html += `<div class="section-bar"></div>`;
-      }
-      html += `
-        <article class="news-card">
-          <div class="card-thumb">
-            <div class="thumb-placeholder" style="background:${a.bg}">
-              ${a.icon}
-            </div>
-          </div>
-          <div class="card-body">
-            <h2 class="card-headline">${a.headline}</h2>
-            <div class="card-meta">
-              <span class="card-source">${a.source}</span>
-              <span class="card-time">${a.time}</span>
-            </div>
-          </div>
-        </article>
-      `;
-      list.insertAdjacentHTML('beforeend', html);
-    });
+const articles = [
+  {
+    headline: "Artemis II Crew on Course for the Moon in First Crewed Deep Space Mission Since Apollo",
+    tag: "SCIENCE", source: "FRANKLY", time: "2 hrs ago", author: "Sarah Mitchell",
+    bg: "#0B1D3A",
+    icon: `<svg width="64" height="64" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="16" fill="#1E3A5F"/><circle cx="22" cy="22" r="10" fill="#C0C8D4" opacity="0.9"/><circle cx="18" cy="19" r="3" fill="#A0AAB8" opacity="0.5"/><circle cx="26" cy="24" r="2" fill="#A0AAB8" opacity="0.4"/></svg>`,
+    body: [
+      "NASA's Artemis II mission has reached a pivotal milestone as the Orion spacecraft, carrying four astronauts, successfully completed its translunar injection burn and is now hurtling toward the Moon. The crew — Commander Reid Wiseman, Pilot Victor Glover, and Mission Specialists Christina Koch and Jeremy Hansen — are the first humans to travel beyond low Earth orbit since Apollo 17 in December 1972.",
+      "The spacecraft launched from Kennedy Space Center at 6:35 p.m. EDT on April 1, and by Thursday evening had fired its main engine for nearly six minutes to break free of Earth orbit. Flight controllers in Houston confirmed the burn was nominal, placing Orion on a precise trajectory for a free-return flyby around the Moon.",
+      "The 10-day mission will see the crew travel farther from Earth than any humans in history, reaching approximately 252,800 miles from our planet. Glover becomes the first person of color, Koch the first woman, and Hansen the first non-U.S. citizen to venture beyond low Earth orbit.",
+      "Mission planners have built in a rare treat — a solar eclipse visible from Orion's vantage point. During this hour-long event, the crew will photograph the solar corona and watch for meteoroid impacts on the darkened lunar surface.",
+      "The mission serves as a critical test of Orion's life-support systems and navigation capabilities ahead of Artemis III, which aims to land astronauts on the lunar surface."
+    ]
+  },
+  {
+    headline: "Trump Proposes Record $1.5 Trillion Defense Budget as Spending Reaches WWII Levels",
+    tag: "U.S. POLITICS", source: "FRANKLY", time: "3 hrs ago", author: "James Carter",
+    bg: "#1A1A2E",
+    icon: `<svg width="56" height="56" viewBox="0 0 40 40"><rect x="8" y="16" width="24" height="16" rx="2" fill="#333952"/><polygon points="20,6 12,16 28,16" fill="#4A5580"/><rect x="18" y="20" width="4" height="8" fill="#6B7DB3" opacity="0.7"/></svg>`,
+    body: [
+      "President Trump has submitted to Congress the largest defense budget request in American history, calling for $1.5 trillion in military spending for the next fiscal year. The proposal represents the steepest year-over-year increase since World War II and comes amid the ongoing conflict with Iran.",
+      "The budget includes funding for F-35 stealth fighter jets, new Virginia-class submarines, and the president's signature \"Golden Dome\" missile defense shield, estimated at $185 billion alone.",
+      "Critics have pointed to stark trade-offs. During a White House Easter lunch, the president said the federal government could no longer afford social programs like daycare, Medicare, and Medicaid at their current levels, suggesting states shoulder those responsibilities.",
+      "Congressional Democrats immediately pushed back, calling the budget a statement of misplaced priorities. Defense analysts questioned whether the Pentagon can absorb increases of this magnitude without significant waste.",
+      "The proposal arrives as the U.S. enters its second month of military operations against Iran, with no clear timeline for resolution."
+    ]
+  },
+  {
+    headline: "U.S. Economy Adds 178,000 Jobs in March as Unemployment Dips to 4.3%",
+    tag: "BUSINESS", source: "FRANKLY", time: "5 hrs ago", author: "Rachel Torres",
+    bg: "#1B5E3B",
+    icon: `<svg width="56" height="56" viewBox="0 0 40 40"><rect x="6" y="26" width="6" height="10" fill="#4CAF80"/><rect x="14" y="20" width="6" height="16" fill="#3D9E6E"/><rect x="22" y="14" width="6" height="22" fill="#2E8B5A"/><rect x="30" y="8" width="6" height="28" fill="#1F7A48"/></svg>`,
+    body: [
+      "The U.S. labor market showed resilience in March, with employers adding 178,000 jobs and reversing losses from the previous month. The unemployment rate edged down to 4.3 percent, though the decline was partly driven by a drop in the number of people actively seeking work.",
+      "Healthcare and hospitality led the gains, sectors that have consistently shown demand for workers even as other parts of the economy face uncertainty.",
+      "Economists offered mixed interpretations. Some pointed to the solid headline number as evidence of a fundamentally healthy labor market. Others cautioned that declining labor force participation could mask underlying softness.",
+      "Financial markets reacted modestly, with major indices ticking higher in early trading. The data will factor into the Federal Reserve's next interest rate decision.",
+      "The report comes at a sensitive time, with global oil prices elevated due to the Middle East conflict and consumer confidence surveys showing increased household caution."
+    ]
+  },
+  {
+    headline: "Jury Finds Meta and YouTube Liable for Harming Youth Through Addictive Design",
+    tag: "TECH", source: "FRANKLY", time: "6 hrs ago", author: "David Chen",
+    bg: "#CC2A1E",
+    icon: `<svg width="50" height="50" viewBox="0 0 36 36"><rect x="4" y="4" width="28" height="28" rx="6" fill="#E8453A"/><rect x="10" y="14" width="16" height="2" rx="1" fill="#fff"/><rect x="10" y="20" width="16" height="2" rx="1" fill="#fff"/><circle cx="13" cy="10" r="2" fill="#fff" opacity="0.6"/></svg>`,
+    body: [
+      "A Los Angeles jury has found Meta and YouTube liable for harming a young woman through the addictive design of their social media platforms, delivering a landmark verdict that could reshape how the tech industry faces legal accountability.",
+      "The case was brought on behalf of a teenager whose family argued that algorithmically-driven content feeds contributed to severe mental health consequences. Plaintiffs presented internal documents showing both companies were aware of potential harms but prioritized engagement metrics.",
+      "Advocacy groups expressed hope the ruling would build momentum for broader legislative action. Several organizations have long argued that social media companies bear responsibility for designing products that exploit psychological vulnerabilities in minors.",
+      "Both companies indicated they intend to appeal, arguing their platforms are protected under existing communications law. Legal experts say the case could eventually reach the Supreme Court.",
+      "The ruling comes as multiple states have moved to restrict minors' access to social media, and as Congress debates federal legislation imposing new design standards and age-verification requirements."
+    ]
+  },
+  {
+    headline: "Iran Claims It Shot Down U.S. Fighter Jet as Gulf Tensions Escalate",
+    tag: "WORLD", source: "FRANKLY", time: "4 hrs ago", author: "Nadia Karim",
+    bg: "#3A1A0A",
+    icon: `<svg width="56" height="56" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#5C2D0E"/><path d="M12 20 L20 12 L28 20 L20 28 Z" fill="#D4871C" opacity="0.8"/><circle cx="20" cy="20" r="4" fill="#E8A840"/></svg>`,
+    body: [
+      "Iranian state media reported that Iranian air defenses shot down a U.S. fighter jet, a claim partially confirmed by a U.S. official who acknowledged a search-and-rescue operation is underway. The incident marks one of the most significant direct confrontations since hostilities began.",
+      "The Pentagon declined to comment on specifics, citing operational security. Iranian officials displayed claimed wreckage on state television, though independent verification has not been possible.",
+      "The incident occurred against a backdrop of widening regional conflict. Kuwait reported Iranian strikes on a power and desalination plant. Saudi Arabia intercepted two Iranian drones. Bahrain worked to contain fires from an Iranian attack on a business facility.",
+      "Yemen's Houthi forces fired ballistic missiles at Israel in coordination with Iran and Hezbollah. In Iraq, an Iranian-backed militia claimed responsibility for six attacks on U.S. military bases over 24 hours.",
+      "Diplomatic efforts continue, with 35 nations convening virtually to discuss the Strait of Hormuz. The U.S. was notably absent from the meeting, organized by British Prime Minister Keir Starmer."
+    ]
+  },
+  {
+    headline: "Trump Fires Attorney General Pam Bondi, Names Former Defense Lawyer as Replacement",
+    tag: "U.S. POLITICS", source: "FRANKLY", time: "8 hrs ago", author: "Michael Reeves",
+    bg: "#2A2040",
+    icon: `<svg width="50" height="50" viewBox="0 0 36 36"><rect x="6" y="8" width="24" height="20" rx="3" fill="#4A3B6B"/><path d="M10 14h16M10 18h12M10 22h8" stroke="#8B7EC8" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    body: [
+      "President Trump has fired Attorney General Pam Bondi and named his former criminal defense lawyer as her replacement, capping a turbulent tenure at the Justice Department.",
+      "Bondi's departure was announced without advance notice. White House officials characterized the move as a personnel decision aimed at bringing in leadership better aligned with the president's legal priorities.",
+      "The choice of a personal defense attorney for the nation's top law enforcement position drew immediate criticism from legal experts who questioned whether the nominee could maintain traditional independence.",
+      "During her tenure, Bondi oversaw unprecedented demands to states for sensitive voter data and led the politically charged release of the Jeffrey Epstein files.",
+      "The nomination will require Senate confirmation, with several Republican senators already signaling they want to hear from the nominee about handling ongoing investigations."
+    ]
+  },
+  {
+    headline: "COVID Variant BA.3.2 'Cicada' Detected in 23 Countries and Half of U.S. States",
+    tag: "HEALTH", source: "FRANKLY", time: "7 hrs ago", author: "Dr. Lisa Park",
+    bg: "#0E4D40",
+    icon: `<svg width="50" height="50" viewBox="0 0 36 36"><circle cx="18" cy="18" r="12" fill="#1A6B58"/><circle cx="18" cy="18" r="6" fill="#2AAA8A" opacity="0.7"/><circle cx="18" cy="18" r="2" fill="#5DDFC0"/><line x1="18" y1="6" x2="18" y2="12" stroke="#2AAA8A" stroke-width="1.5"/><line x1="18" y1="24" x2="18" y2="30" stroke="#2AAA8A" stroke-width="1.5"/><line x1="6" y1="18" x2="12" y2="18" stroke="#2AAA8A" stroke-width="1.5"/><line x1="24" y1="18" x2="30" y2="18" stroke="#2AAA8A" stroke-width="1.5"/></svg>`,
+    body: [
+      "A new COVID-19 variant designated BA.3.2, nicknamed \"Cicada,\" has been detected in at least 23 countries and roughly half of U.S. states, raising concerns about a potential new wave heading into spring.",
+      "Early genomic analysis suggests the variant carries several spike protein mutations that may enhance immune evasion. Researchers caution that laboratory findings do not always translate to real-world severity.",
+      "Hospitals in several regions have reported modest upticks in COVID-related admissions, though numbers remain far below previous surge peaks. Officials are monitoring wastewater data closely.",
+      "The FDA recently approved a new GLP-1 drug from Eli Lilly, and health systems continue navigating staffing challenges. Officials have urged high-risk groups to ensure vaccinations are up to date.",
+      "Separately, researchers published promising findings about why some healthcare workers appear resistant to flu despite frequent exposure — work that could inform broader respiratory virus prevention strategies."
+    ]
+  },
+  {
+    headline: "Pentagon Fires Army Chief of Staff in Latest Military Leadership Shakeup",
+    tag: "DEFENSE", source: "FRANKLY", time: "10 hrs ago", author: "Tom Bradley",
+    bg: "#2C2C2C",
+    icon: `<svg width="50" height="50" viewBox="0 0 36 36"><polygon points="18,4 22,14 33,14 24,21 27,32 18,25 9,32 12,21 3,14 14,14" fill="#555" opacity="0.8"/></svg>`,
+    body: [
+      "Defense Secretary Pete Hegseth asked Army Chief of Staff General Randy George to step down and retire, marking the latest in a series of Pentagon leadership changes since the start of the Iran conflict.",
+      "General George had served as the Army's top uniformed officer since 2023 and was widely respected for his focus on modernization and readiness. Sources indicated disagreements over operational strategy.",
+      "Several retired senior officers expressed concern about the pace of turnover during active conflict, arguing that frequent changes risk disrupting command continuity at a critical moment.",
+      "Hegseth defended the decision, saying the Army needed leadership fully aligned with the administration's strategic vision. A successor has not yet been named.",
+      "The firing comes alongside the record defense budget proposal and increasing attacks from Iranian-backed militias across the Middle East."
+    ]
   }
+];
 
-  // Tab switching
-  document.getElementById('catNav').addEventListener('click', (e) => {
-    const tab = e.target.closest('.cat-tab');
-    if (!tab) return;
-    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    // Re-trigger animation
-    document.querySelectorAll('.news-card').forEach(c => {
-      c.style.animation = 'none';
-      c.offsetHeight;
-      c.style.animation = '';
-    });
+function renderArticles() {
+  const list = document.getElementById('newsList');
+  list.innerHTML = '';
+  articles.forEach((a, i) => {
+    const showBar = i === 3 || i === 6;
+    let html = '';
+    if (showBar) html += `<div class="section-bar"></div>`;
+    html += `
+      <article class="news-card" onclick="openArticle(${i})">
+        <div class="card-thumb">
+          <div class="thumb-placeholder" style="background:${a.bg}">${a.icon}</div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">${a.tag}</span>
+          <h2 class="card-headline">${a.headline}</h2>
+          <div class="card-meta">
+            <span class="card-source">${a.source}</span>
+            <span class="card-time">${a.time}</span>
+          </div>
+        </div>
+      </article>`;
+    list.insertAdjacentHTML('beforeend', html);
   });
+}
 
-  renderArticles();
+function openArticle(index) {
+  const a = articles[index];
+  const page = document.getElementById('articlePage');
+  document.getElementById('articleHero').style.background = a.bg;
+  document.getElementById('articleHero').innerHTML = a.icon.replace(/width="\d+"/g, 'width="100"').replace(/height="\d+"/g, 'height="100"');
+
+  const related = articles.filter((_, i) => i !== index).slice(0, 3);
+  document.getElementById('articleContent').innerHTML = `
+    <span class="article-tag">${a.tag}</span>
+    <h1 class="article-title">${a.headline}</h1>
+    <div class="article-byline">
+      <span>By ${a.author}</span>
+      <span class="article-byline-dot"></span>
+      <span>${a.time}</span>
+      <span class="article-byline-dot"></span>
+      <span>April 3, 2026</span>
+    </div>
+    <div class="article-divider"></div>
+    <div class="article-body">${a.body.map(p => `<p>${p}</p>`).join('')}</div>
+    <div class="article-share">
+      <button class="share-btn" onclick="shareArticle()">Share</button>
+      <button class="share-btn">Save</button>
+    </div>
+    <div class="related-section">
+      <div class="related-label">More from Frankly</div>
+      ${related.map(r => {
+        const idx = articles.indexOf(r);
+        return `<div class="related-item" onclick="openArticle(${idx})">
+          <div class="related-item-tag">${r.tag}</div>
+          <div class="related-item-title">${r.headline}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  page.classList.add('open');
+  page.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  history.pushState({ article: index }, '');
+}
+
+function closeArticle() {
+  document.getElementById('articlePage').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function goHome() {
+  closeArticle();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function shareArticle() {
+  if (navigator.share) {
+    navigator.share({ title: 'Frankly News', url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href);
+    alert('Link copied!');
+  }
+}
+
+document.getElementById('catNav').addEventListener('click', (e) => {
+  const tab = e.target.closest('.cat-tab');
+  if (!tab) return;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.news-card').forEach(c => {
+    c.style.animation = 'none'; c.offsetHeight; c.style.animation = '';
+  });
+});
+
+window.addEventListener('popstate', closeArticle);
+renderArticles();
 </script>
 </body>
 </html>
